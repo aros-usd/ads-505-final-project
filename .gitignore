@@ -1,0 +1,11 @@
+# raw monthly BTS downloads are ~250 MB each (over GitHub's 100 MB limit);
+# download them yourself (see README). The 30,000-row sample IS committed.
+Data/*.csv
+!Data/flights_sample_2025H1.csv
+Data/readme.html
+
+# Python / Jupyter clutter
+__pycache__/
+.ipynb_checkpoints/
+*.pyc
+.venv/

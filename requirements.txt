@@ -1,0 +1,9 @@
+pandas>=3.0
+numpy>=2.0
+matplotlib>=3.10
+seaborn>=0.13
+scikit-learn>=1.9
+imbalanced-learn>=0.14
+mlba>=2.0
+jupyter
+nbconvert>=7.0
