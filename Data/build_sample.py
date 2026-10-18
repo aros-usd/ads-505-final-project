@@ -10,14 +10,12 @@ Reporting Carrier On-Time Performance (1987-present):
 https://www.transtats.bts.gov/Fields.asp?gnoyr_VQ=FGJ
 """
 
-from pathlib import Path
 import pandas as pd
 
 # constants for configuration
 ROWS_PER_FILE = 5000
-RANDOM_STATE = 42
+RANDOM_STATE = 123
 
-DATA_DIR = Path(__file__).parent / "Data"
 MONTH_FILES = [
     "January.csv",
     "February.csv",
@@ -26,7 +24,7 @@ MONTH_FILES = [
     "May.csv",
     "June.csv",
 ]
-OUTPUT_FILE = DATA_DIR / "flights_sample_2025H1.csv"
+OUTPUT_FILE = "flights_sample_2025H1.csv"
 
 # Features known before departure (Tail_Number kept for aircraft-history features)
 FEATURE_COLS = [
@@ -52,7 +50,7 @@ TARGET_COLS = ["ArrDelayMinutes", "ArrDel15"]
 FILTER_COLS = ["Cancelled", "Diverted"]  # used for filtering, then dropped
 
 
-def load_and_sample(path: Path) -> pd.DataFrame:
+def load_and_sample(path) -> pd.DataFrame:
     """Load one monthly file, drop cancelled/diverted flights, and sample it."""
     df = pd.read_csv(
         path,
@@ -69,7 +67,7 @@ def load_and_sample(path: Path) -> pd.DataFrame:
     sample = df.sample(n=n, random_state=RANDOM_STATE)
 
     print(
-        f"{path.name} total={total_rows}  "
+        f"{path} total={total_rows}  "
         f"completed={completed_rows}  sampled={n}  "
         f"delay rate={sample['ArrDel15'].mean():.1%}"
     )
@@ -77,7 +75,7 @@ def load_and_sample(path: Path) -> pd.DataFrame:
 
 
 def main() -> None:
-    samples = [load_and_sample(DATA_DIR / name) for name in MONTH_FILES]
+    samples = [load_and_sample(name) for name in MONTH_FILES]
 
     combined = (
         pd.concat(samples)
