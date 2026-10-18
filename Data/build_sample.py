@@ -26,14 +26,13 @@ MONTH_FILES = [
 ]
 OUTPUT_FILE = "flights_sample_2025H1.csv"
 
-# Features known before departure (Tail_Number kept for aircraft-history features)
+# Features known before departure
 FEATURE_COLS = [
     "Month",
     "DayofMonth",
     "DayOfWeek",
     "FlightDate",
     "Reporting_Airline",
-    "Tail_Number",
     "Origin",
     "Dest",
     "OriginState",
@@ -46,7 +45,7 @@ FEATURE_COLS = [
     "Distance",
     "DistanceGroup",
 ]
-TARGET_COLS = ["ArrDelayMinutes", "ArrDel15"]
+TARGET_COLS = ["ArrDel15"]
 FILTER_COLS = ["Cancelled", "Diverted"]  # used for filtering, then dropped
 
 
